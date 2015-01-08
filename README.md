@@ -18,10 +18,10 @@ Requirements
 * [Unity 4.6+](http://unity3d.com/unity/download)
 
 
-Demo
+Example Scene
 --------
 * Run `example` in the Scenes folder and press play in the Unity editor.
-* UI:  `{ buttons, slider, scrollable text, text, canvas, toggle }`
+* UI elements used:  `{ buttons, slider, scrollable text, text, canvas, toggle }`
 
 
 GameController.cs
