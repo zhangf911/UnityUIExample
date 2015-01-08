@@ -27,11 +27,11 @@ GameController.cs
 ------
 The game controller is the game's core and handles base functions, organized in the following sections:
 
-* Setup - used to setup game variables that runs in `Start()`
-* Game States - controls the various states `{ MainMenu, GamePlay, GameOver, Settings, Credits }`
-* Game Score - this example counts seconds for score.  good for an "Endless Runner".
-* Audio - this example has one sound for all UI button presses.
-* Input - this example uses touch and keyboard commands.
+* Setup:  used to setup game variables that runs in `Start()`
+* Game States:  controls the various states `{ MainMenu, GamePlay, GameOver, Settings, Credits }`
+* Game Score:  this example counts seconds for score.  good for an "Endless Runner".
+* Audio:  this example has one sound for all UI button presses.
+* Input:  this example uses touch and keyboard commands.
 
 Notes:
 * `pubic enum GameStates` defines the various game states and for readability.
