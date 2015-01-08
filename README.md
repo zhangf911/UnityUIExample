@@ -1,6 +1,6 @@
 # UnityUIExample
 --------
-The purpose of this example is to help you get familiar with Unity 4.6+ UI system.  Please make sure to read all sections before beginning.  Any questions, please contact me [@jasonrwalters](http://twitter.com/jasonrwalters)
+The purpose of this example is to help you get familiar with Unity 4.6+ UI system.  Make sure to read all sections before beginning.  Any questions, please contact me [@jasonrwalters](http://twitter.com/jasonrwalters)
 
 
 Helpful Resources
@@ -16,10 +16,12 @@ Requirements
 
 GameController.cs Sections
 ------
-In this example, the game controller acts as the game's core and handles base functions.
+In this script, the game controller acts as the game's core and handles base functions.
 
 * Setup
 * Game States
 * Game Score
 * Audio
 * Input
+
+
