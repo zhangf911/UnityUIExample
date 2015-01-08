@@ -1,8 +1,18 @@
-﻿using UnityEngine;
+﻿//-----------------------------------------
+//   ScoreTextController.cs
+//
+//   Jason Walters
+//   http://glitchbeam.com
+//   @jasonrwalters
+//
+//   last edited on 1/7/2015
+//-----------------------------------------
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class ScoreController : MonoBehaviour 
+public class ScoreTextController : MonoBehaviour 
 {
     void OnDisable()
     {

@@ -1,51 +1,48 @@
-﻿using UnityEngine;
+﻿//-----------------------------------------
+//   GameController.cs
+//
+//   Jason Walters
+//   http://glitchbeam.com
+//   @jasonrwalters
+//
+//   last edited on 1/7/2015
+//-----------------------------------------
+
+using UnityEngine;
 using System.Collections;
 using System;
 
 public enum GameStates
 {
-    MainMenu, GamePlay, GameOver, Credits, Settings, Leaderboards
+    MainMenu, GamePlay, GameOver, Settings, Credits
 }
 
 public class GameController : MonoBehaviour 
 {
+    public AudioClip audioMenu;
+    public int scoreDecimals;
+
+    private GameObject[] go0, go1, go2, go3, go4;
+    private GameObject goBack;
+    private bool changeState = false;
+    private float score;
+
     public static GameStates gameState;
     public static float gameScore;
     public static float gameHighScore;
     public static float gameSoundVolume;
     public static bool gameAudioActive;
 
-    public AudioClip audioMenu;
-    public int scoreDecimals;
-
-    private GameObject[] go0, go1, go2, go3, go4, go5;
-    private GameObject goBack;
-    private bool changeState = false;
-    private float score;
-
-    void SettingsDefault()
-    {
-        gameScore = 0.0f;
-        gameHighScore = PlayerPrefs.GetFloat("HighScore");
-        gameSoundVolume = 0.75f;
-        gameAudioActive = true;
-    }
-
 	// Use this for initialization
 	void Start ()
     {
+        // setup game settings
         SettingsDefault();
 
-        // find all game objects that use specified tag
-        go0 = GameObject.FindGameObjectsWithTag("UI_MainMenu");
-        go1 = GameObject.FindGameObjectsWithTag("UI_GamePlay");
-        go2 = GameObject.FindGameObjectsWithTag("UI_GameOver");
-        go3 = GameObject.FindGameObjectsWithTag("UI_Credits");
-        go4 = GameObject.FindGameObjectsWithTag("UI_Settings");
-        go5 = GameObject.FindGameObjectsWithTag("UI_Leaderboards");
-        goBack = GameObject.FindGameObjectWithTag("UI_Back");
+        // setup game objects
+        FindGameObjects();
 
-        // init our game states
+        // start our game states
         GameState();
 	}
 	
@@ -58,86 +55,78 @@ public class GameController : MonoBehaviour
         if (changeState) GameState();
 	}
 
-    // public so we can access via UI inspectors
-    public void ButtonControls(int state)
+    //-----------------------------------------
+    //   SETUP
+    //-----------------------------------------
+    void SettingsDefault()
     {
-        // map int to enum values for readability
-        gameState = (GameStates)state;
+        // check player prefs for current highscore and update;
+        gameHighScore = PlayerPrefs.GetFloat("HighScore");
 
-        // change the game state
-        changeState = true;
+        // defaults...
+        gameScore = 0.0f;
+        gameSoundVolume = 0.75f;
+        gameAudioActive = true;
     }
 
-    public void AudioVolume(float volume)
+    void FindGameObjects()
     {
-        gameSoundVolume = volume;
+        // find all game objects that use specified tag
+        go0 = GameObject.FindGameObjectsWithTag("MainMenu");
+        go1 = GameObject.FindGameObjectsWithTag("GamePlay");
+        go2 = GameObject.FindGameObjectsWithTag("GameOver");
+        go3 = GameObject.FindGameObjectsWithTag("Settings");
+        go4 = GameObject.FindGameObjectsWithTag("Credits");
+        goBack = GameObject.FindGameObjectWithTag("UI_Back");
     }
 
-    public void AudioEnabled(bool active)
-    {
-        gameAudioActive = active;
-    }
-
-    void AudioPlay(AudioClip clipName)
-    {
-        // update our audio volume
-        audio.volume = gameSoundVolume;
-
-        // if audio is active...
-        if (gameAudioActive)
-        {
-            // play specified clip
-            audio.clip = clipName;
-            audio.Play();
-        }
-    }
-
+    //-----------------------------------------
+    //   GAME STATES
+    //-----------------------------------------
     void GameState()
     {
         // game state switch
         switch (gameState)
         {
             case GameStates.MainMenu:
-                AudioPlay(audioMenu);
-                UIStates("UI_Back", false);
-                UIStates("MainMenu", true);
-                UIStates("GamePlay", false);
-                UIStates("GameOver", false);
-                UIStates("Credits", false);
-                UIStates("Settings", false);
-                UIStates("Leaderboards", false);
+                AudioController(audioMenu);
+                State("UI_Back", false);
+                State("MainMenu", true);
+                State("GamePlay", false);
+                State("GameOver", false);
+                State("Settings", false);
+                State("Credits", false);
                 break;
+
             case GameStates.GamePlay:
-                AudioPlay(audioMenu);
-                UIStates("UI_Back", false);
-                UIStates("MainMenu", false);
-                UIStates("GamePlay", true);
-                UIStates("GameOver", false);
+                AudioController(audioMenu);
+                State("UI_Back", false);
+                State("MainMenu", false);
+                State("GamePlay", true);
+                State("GameOver", false);
                 break;
+
             case GameStates.GameOver:
-                AudioPlay(audioMenu);
-                UIStates("UI_Back", true);
-                UIStates("GamePlay", false);
-                UIStates("GameOver", true);
+                AudioController(audioMenu);
+                State("UI_Back", true);
+                State("GamePlay", false);
+                State("GameOver", true);
                 break;
-            case GameStates.Credits:
-                AudioPlay(audioMenu);
-                UIStates("UI_Back", true);
-                UIStates("MainMenu", false);
-                UIStates("Credits", true);
-                break;
+
             case GameStates.Settings:
-                AudioPlay(audioMenu);
-                UIStates("UI_Back", true);
-                UIStates("MainMenu", false);
-                UIStates("Settings", true);
+                AudioController(audioMenu);
+                State("UI_Back", true);
+                State("MainMenu", false);
+                State("Settings", true);
                 break;
-            case GameStates.Leaderboards:
-                AudioPlay(audioMenu);
-                UIStates("UI_Back", true);
-                UIStates("MainMenu", false);
-                UIStates("Leaderboards", true);
+
+            case GameStates.Credits:
+                AudioController(audioMenu);
+                State("UI_Back", true);
+                State("MainMenu", false);
+                State("Credits", true);
                 break;
+            
             default:
                 break;
         }
@@ -146,7 +135,7 @@ public class GameController : MonoBehaviour
         changeState = false;
     }
 
-    void UIStates(string tag, bool active)
+    void State(string tag, bool active)
     {
         switch (tag)
         {
@@ -154,26 +143,27 @@ public class GameController : MonoBehaviour
                 for (int i = 0; i < go0.Length; i++)
                     go0[i].SetActive(active);
                 break;
+
             case "GamePlay":
                 for (int i = 0; i < go1.Length; i++)
                     go1[i].SetActive(active);
                 break;
+
             case "GameOver":
                 for (int i = 0; i < go2.Length; i++)
                     go2[i].SetActive(active);
                 break;
-            case "Credits":
+
+            case "Settings":
                 for (int i = 0; i < go3.Length; i++)
                     go3[i].SetActive(active);
                 break;
-            case "Settings":
+            
+            case "Credits":
                 for (int i = 0; i < go4.Length; i++)
                     go4[i].SetActive(active);
                 break;
-            case "Leaderboards":
-                for (int i = 0; i < go5.Length; i++)
-                    go5[i].SetActive(active);
-                break;
+
             case "UI_Back":
                 goBack.SetActive(active);
                 break;
@@ -183,6 +173,10 @@ public class GameController : MonoBehaviour
         }
     }
 
+
+    //-----------------------------------------
+    //   GAME SCORE
+    //-----------------------------------------
     void GameScore()
     {
         // if during game play...
@@ -220,6 +214,49 @@ public class GameController : MonoBehaviour
                 gameHighScore = PlayerPrefs.GetFloat("HighScore");
             }
         }
+    }
+
+
+    //-----------------------------------------
+    //   AUDIO
+    //-----------------------------------------
+    // volume control, max = 1.0f
+    public void AudioVolume(float volume)
+    {
+        gameSoundVolume = volume;
+    }
+
+    // audio toggle - on/off
+    public void AudioEnabled(bool active)
+    {
+        gameAudioActive = active;
+    }
+
+    // audio file controller
+    void AudioController(AudioClip clipName)
+    {
+        // update our audio volume
+        audio.volume = gameSoundVolume;
+
+        // if audio is active...
+        if (gameAudioActive)
+        {
+            // play specified clip
+            audio.clip = clipName;
+            audio.Play();
+        }
+    }
+
+    //-----------------------------------------
+    //   INPUT
+    //-----------------------------------------
+    public void ButtonControls(int state)
+    {
+        // map int to enum values for readability
+        gameState = (GameStates)state;
+
+        // change the game state
+        changeState = true;
     }
 
     void KeysPressed()
