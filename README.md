@@ -18,6 +18,11 @@ Requirements
 * [Unity 4.6+](http://unity3d.com/unity/download)
 
 
+Demo
+--------
+* Run `example` in the Scenes folder and press play in the Unity editor.
+
+
 GameController.cs
 ------
 The game controller is the game's core and handles base functions, organized in the following sections:
@@ -32,7 +37,4 @@ Notes:
 * `pubic enum GameStates` defines the various game states and for readability.
 * `public void` methods are tied to UI buttons.  Examine the button's inspector to see configuration.
 * `scoreDecimals` determines how many decimal places to display in the score.  can be edited in the inspector.
-
-
-Thank you!
-------
+* Game Objects are active/deactive based on game state.
