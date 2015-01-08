@@ -21,6 +21,7 @@ Requirements
 Demo
 --------
 * Run `example` in the Scenes folder and press play in the Unity editor.
+* UI:  `{ buttons, slider, scrollable text, text, canvas, toggle }`
 
 
 GameController.cs
