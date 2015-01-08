@@ -29,6 +29,10 @@ The game controller is the game's core and handles base functions, organized in 
 * Input - this example uses touch and keyboard commands.
 
 Notes:
+* `pubic enum GameStates` defines the various game states and for readability.
 * `public void` methods are tied to UI buttons.  Examine the button's inspector to see configuration.
+* `scoreDecimals` determines how many decimal places to display in the score.  can be edited in the inspector.
 
 
+Thank you!
+------
