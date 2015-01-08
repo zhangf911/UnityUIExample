@@ -1,7 +1,5 @@
 # UnityUIExample
-Unity 4.6+ UI Example
 --------
-
 The purpose of this example is to help you get familiar with Unity 4.6+ UI system.  Please make sure to read all sections before beginning.  Any questions, please contact me [@jasonrwalters](http://twitter.com/jasonrwalters)
 
 
