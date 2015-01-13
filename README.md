@@ -30,12 +30,12 @@ The game controller is the game's core and handles base functions, organized in 
 
 * Setup:  used to setup game variables that runs in `Start()`
 * Game States:  controls the various states `{ MainMenu, GamePlay, GameOver, Settings, Credits }`
-* Game Score:  this example counts seconds for score.  good for an "Endless Runner".
+* Game Score:  this example counts seconds for score.
 * Audio:  this example has one sound for all UI button presses.
 * Input:  this example uses touch and keyboard commands.
 
 Notes:
-* `pubic enum GameStates` defines the various game states and for readability.
+* `public enum GameStates` defines the various game states and for readability.
 * `public void` methods are tied to UI buttons.  Examine the button's inspector to see configuration.
 * `scoreDecimals` determines how many decimal places to display in the score.  can be edited in the inspector.
 * Game Objects are active/deactive based on game state.
