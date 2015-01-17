@@ -17,7 +17,6 @@ Helpful Resources
 Requirements
 --------
 * [Unity 4.6+](http://unity3d.com/unity/download)
-* PC/Mac
 
 
 Example Scene
