@@ -11,6 +11,7 @@ Helpful Resources
 --------
 * Unity Beginner UI Lessons: [http://unity3d.com/learn/tutorials/modules/beginner/ui](http://unity3d.com/learn/tutorials/modules/beginner/ui)
 * Unity Manual - UI: [http://docs.unity3d.com/Manual/UISystem.html](http://docs.unity3d.com/Manual/UISystem.html)
+* Unity UI Forum: [http://forum.unity3d.com/forums/unity-ui.60/](http://forum.unity3d.com/forums/unity-ui.60/)
 
 
 Requirements
